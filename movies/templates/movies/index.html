@@ -1,9 +1,29 @@
-{% if movie_list %}
-    <ul>
-    {% for movie in movie_list%}
-        <li><a href="/movies/{{ movie.id }}/">{{ movie.title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No movies are available.</p>
-{% endif %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'movies/assets/css/indexS.css' %}" rel="stylesheet">
+    <title>Cartelera de Películas</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Peliculas</h1>
+        <div>
+            <div id="movieGrid">
+                {% for movie in movies %}
+                    <div class="card">
+                        <img src="{{ movie.poster_path }}" alt="{{ movie.title }}" class="movie-image">
+                        <h2 class="movie-title"><a href="/movies/{{ movie.id }}/" style="text-decoration: none; color: inherit;">{{ movie.title }}</a></h2>
+                        <p class="movie.info">Género: {{ movie.genres.all|join:", " }}</p>
+                        <p class="movie.info">Duración: {{ movie.running_time }} min</p>
+                        
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

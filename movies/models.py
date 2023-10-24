@@ -20,7 +20,7 @@ class Job(models.Model):
 
 class Person(models.Model):
     name = models.CharField(max_length=128)
-
+    image_path = models.URLField(blank=True, null=True)  # Campo para almacenar el enlace de la imagen
     def __str__(self):
         return self.name
 

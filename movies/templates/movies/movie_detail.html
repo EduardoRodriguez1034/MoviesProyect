@@ -1,13 +1,79 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>{{movie.title}}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
+        <link href="{% static 'movies/assets/css/style.css' %}" rel="stylesheet">
+        
     </head>
     <body>
-        <h1> {{ movie.title }} ({{ movie.release_date|date:"Y" }}) </h1>   
-        <p> {{ movie.overview }} </p>
+        <header class="page-header">
+            <h1>MyMovies</h1>
+        </header>
+
+        <article>
+            <div class="top-movie">
+                <img class="poster" src="{{movie.poster_path}}" alt="Poster Imagen">
+                <img src="{% static 'movies/assets/img'|add:movie.poster_path %}" alt="">
+                <header>
+                <h1 class="movie-title"> {{ movie.title }} ({{ movie.release_date|date:"Y" }}) </h1>
+                <div class="movie-info">
+                    <p>{{ movie.release_date|date:"j/n/Y" }} - </p>
+                        {% if genres %}
+                        <ul class="movie-genre">
+                            {% for genre in genres %}
+                        <li>{{ genre.name }}{% if not forloop.last %} | {% endif %}</li>
+                            {% endfor %}
+                        </ul>
+                         {% else %}
+                    <p>No géneros disponibles</p>
+                     {% endif %}
+
+                    <p> - {{ movie.running_time }} minutos</p>
+                </div>       
+                
+                <h1>Vista general</h1>
+                <p>{{ movie.overview }} </p>
+    
+                <details>
+                    <summary>Production Details</summary>
+                    <p> Budget: ${{movie.budget}} </p>
+                    <p> Revenue: ${{movie.revenue}}</p>
+                </details>
+                </header>
+            </div>
+            <h1>Reparto principal</h1>
+        
+        </article>
+        <div class="reparto">
+            <ul>
+                {% for movie_credit in movie_credits %}
+                    <li>
+                        <span class="person-name">{{ movie_credit.person.name }}</span> ({{ movie_credit.job.name }})
+                    </li>
+                    <img src="{{ movie_credit.person.image_path }}" alt="{{ movie_credit.person.name }}" class="person-image">
+                {% endfor %}
+            </ul>
+        </div>
+        <section class="reviews">
+            <h1>Reviews de la Película</h1>
+            <ul>
+                {% for review in movie_reviews %}
+                    <li>
+                        <div class="review-user">{{ review.user.username }}</div>
+                        <div class="review-rating">Rating: {{ review.rating }}/100</div>
+                        <div class="review-text">{{ review.review }}</div>
+                    </li>
+                {% empty %}
+                    <p>No hay reviews disponibles.</p>
+                {% endfor %}
+            </ul>
+        </section>
+        <footer>
+            <p> Proyecto de ejemplo de la materia Programación Web</p>
+        </footer>
     </body>
 </html>

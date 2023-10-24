@@ -1,0 +1,45 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 20px;
+    margin: 10px; /* Añade margen para separar las tarjetas */
+    width: 200px; /* Establece un ancho fijo para todas las tarjetas */
+    height: 500px; /* Establece una altura fija para todas las tarjetas */
+    display: inline-block; /* Hace que las tarjetas se muestren en línea */
+    vertical-align: top; /* Alinea las tarjetas en la parte superior */
+}
+
+.movie-image {
+    width: 100%;
+    height: 50%; /* Establece la altura deseada para la imagen */
+    object-fit: cover; /* Asegura que las imágenes se ajusten correctamente al tamaño */
+    border-radius: 5px 5px 0 0;
+}
+
+.movie-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.movie-info {
+    margin-top: 5px;
+    font-size: 1rem;
+    
+}
